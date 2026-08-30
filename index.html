@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>YIO VPN</title>
+
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -14,15 +17,23 @@
       color: white;
       text-align: center;
     }
+
     .logo {
       font-size: 30px;
       font-weight: bold;
       margin-top: 30px;
     }
+
+    .logo small {
+      font-size: 17px;
+      font-weight: normal;
+    }
+
     .status {
       margin: 35px 0;
       font-size: 22px;
     }
+
     button {
       width: 100%;
       padding: 16px;
@@ -31,78 +42,189 @@
       font-size: 18px;
       font-weight: bold;
       margin-top: 15px;
+      cursor: pointer;
     }
   </style>
 </head>
+
 <body>
-  <div class="logo">🔐 YIO VPN</div>
+
+  <div class="logo">
+    🔐 YIO VPN
+  </div>
+
   <div class="status">
     🟢 VPN готов к подключению
   </div>
+
   <button onclick="connectVPN()">
     🚀 ПОДКЛЮЧИТЬ VPN
   </button>
+
   <button onclick="subscription()">
-  💳 Моя подписка
-</button>
+    💳 Моя подписка
+  </button>
+
   <button onclick="devices()">
     📱 Мои устройства
   </button>
+
   <button onclick="servers()">
     🌍 Серверы
   </button>
+
+
   <script>
+
+    // Telegram Mini App
     const tg = window.Telegram.WebApp;
+
     tg.ready();
     tg.expand();
+
+
+    // Пользователь Telegram
     const user = tg.initDataUnsafe.user;
 
-if (user) {
-  document.querySelector(".logo").innerHTML =
-    "🔐 YIO VPN<br><small>Привет, " + user.first_name + "!</
-function subscription() {
-  tg.showAlert(
-    "💳 Моя подписка\n\n" +
-    "Статус: 🟢 Активна\n" +
-    "Тариф: Premium\n" +
-    "Осталось: 30 дней"
-  );
-}
-  function devices() {
-  tg.showAlert(
-    "📱 Мои устройства\n\n" +
-    "Устройств подключено: 0\n\n" +
-    "Нажмите «Добавить устройство», чтобы подключить VPN."
-  );
-}
-  function servers() {
-  tg.showPopup({
-    title: "🌍 VPN-серверы",
-    message: "Выберите сервер:",
-    buttons: [
-      {id: "finland", type: "default", text: "🇫🇮 Финляндия"},
-      {id: "germany", type: "default", text: "🇩🇪 Германия"},
-      {id: "netherlands", type: "default", text: "🇳🇱 Нидерланды"},
-      {id: "usa", type: "default", text: "🇺🇸 США"}
-    ]
-  }, function(buttonId) {
-    if (buttonId === "finland") {
-      tg.showAlert("🇫🇮 Выбран сервер: Финляндия");
+    if (user) {
+      document.querySelector(".logo").innerHTML =
+        "🔐 YIO VPN<br>" +
+        "<small>Привет, " +
+        user.first_name +
+        "!</small>";
     }
 
-    if (buttonId === "germany") {
-      tg.showAlert("🇩🇪 Выбран сервер: Германия");
+
+    // =========================
+    // ПОДКЛЮЧИТЬ VPN
+    // =========================
+
+    function connectVPN() {
+
+      tg.showAlert(
+        "🚀 Подключение VPN\n\n" +
+        "Настоящее VPN-подключение " +
+        "будет подключено на следующем этапе."
+      );
+
     }
 
-    if (buttonId === "netherlands") {
-      tg.showAlert("🇳🇱 Выбран сервер: Нидерланды");
+
+    // =========================
+    // МОЯ ПОДПИСКА
+    // =========================
+
+    function subscription() {
+
+      tg.showAlert(
+        "💳 Моя подписка\n\n" +
+        "Статус: 🟢 Активна\n" +
+        "Тариф: Premium\n" +
+        "Осталось: 30 дней"
+      );
+
     }
 
-    if (buttonId === "usa") {
-      tg.showAlert("🇺🇸 Выбран сервер: США");
+
+    // =========================
+    // МОИ УСТРОЙСТВА
+    // =========================
+
+    function devices() {
+
+      tg.showAlert(
+        "📱 Мои устройства\n\n" +
+        "Устройств подключено: 0\n\n" +
+        "Добавление настоящих устройств " +
+        "будет подключено позже."
+      );
+
     }
-  });
-}
+
+
+    // =========================
+    // VPN-СЕРВЕРЫ
+    // =========================
+
+    function servers() {
+
+      tg.showPopup({
+
+        title: "🌍 VPN-серверы",
+
+        message: "Выберите сервер:",
+
+        buttons: [
+
+          {
+            id: "finland",
+            type: "default",
+            text: "🇫🇮 Финляндия"
+          },
+
+          {
+            id: "germany",
+            type: "default",
+            text: "🇩🇪 Германия"
+          },
+
+          {
+            id: "netherlands",
+            type: "default",
+            text: "🇳🇱 Нидерланды"
+          },
+
+          {
+            id: "usa",
+            type: "default",
+            text: "🇺🇸 США"
+          }
+
+        ]
+
+      }, function(buttonId) {
+
+
+        if (buttonId === "finland") {
+
+          tg.showAlert(
+            "🇫🇮 Выбран сервер:\nФинляндия"
+          );
+
+        }
+
+
+        if (buttonId === "germany") {
+
+          tg.showAlert(
+            "🇩🇪 Выбран сервер:\nГермания"
+          );
+
+        }
+
+
+        if (buttonId === "netherlands") {
+
+          tg.showAlert(
+            "🇳🇱 Выбран сервер:\nНидерланды"
+          );
+
+        }
+
+
+        if (buttonId === "usa") {
+
+          tg.showAlert(
+            "🇺🇸 Выбран сервер:\nСША"
+          );
+
+        }
+
+      });
+
+    }
+
   </script>
+
 </body>
 </html>
