@@ -43,8 +43,8 @@
     🚀 ПОДКЛЮЧИТЬ VPN
   </button>
   <button onclick="subscription()">
-    💳 Моя подписка
-  </button>
+  💳 Моя подписка
+</button>
   <button>
     📱 Мои устройства
   </button>
@@ -60,9 +60,9 @@
 if (user) {
   document.querySelector(".logo").innerHTML =
     "🔐 YIO VPN<br><small>Привет, " + user.first_name + "!</
-    function connectVPN() {
-      tg.showAlert(
-        "💳 Моя подписка\n\n" +
+function subscription() {
+  tg.showAlert(
+    "💳 Моя подписка\n\n" +
     "Статус: 🟢 Активна\n" +
     "Тариф: Premium\n" +
     "Осталось: 30 дней"
