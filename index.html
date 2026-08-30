@@ -42,7 +42,7 @@
   <button onclick="connectVPN()">
     🚀 ПОДКЛЮЧИТЬ VPN
   </button>
-  <button>
+  <button onclick="subscription()">
     💳 Моя подписка
   </button>
   <button>
@@ -63,7 +63,14 @@ if (user) {
 }
     function connectVPN() {
       tg.showAlert("Функция подключения VPN будет добавлена на следующем этапе.");
-    }
+    }function subscription() {
+  tg.showAlert(
+    "💳 Моя подписка\n\n" +
+    "Статус: 🟢 Активна\n" +
+    "Тариф: Premium\n" +
+    "Осталось: 30 дней"
+  );
+}
   </script>
 </body>
 </html>
