@@ -45,10 +45,10 @@
   <button onclick="subscription()">
   💳 Моя подписка
 </button>
-  <button>
+  <button onclick="devices()">
     📱 Мои устройства
   </button>
-  <button>
+  <button onclick="servers()">
     🌍 Серверы
   </button>
   <script>
@@ -67,6 +67,41 @@ function subscription() {
     "Тариф: Premium\n" +
     "Осталось: 30 дней"
   );
+}
+  function devices() {
+  tg.showAlert(
+    "📱 Мои устройства\n\n" +
+    "Устройств подключено: 0\n\n" +
+    "Нажмите «Добавить устройство», чтобы подключить VPN."
+  );
+}
+  function servers() {
+  tg.showPopup({
+    title: "🌍 VPN-серверы",
+    message: "Выберите сервер:",
+    buttons: [
+      {id: "finland", type: "default", text: "🇫🇮 Финляндия"},
+      {id: "germany", type: "default", text: "🇩🇪 Германия"},
+      {id: "netherlands", type: "default", text: "🇳🇱 Нидерланды"},
+      {id: "usa", type: "default", text: "🇺🇸 США"}
+    ]
+  }, function(buttonId) {
+    if (buttonId === "finland") {
+      tg.showAlert("🇫🇮 Выбран сервер: Финляндия");
+    }
+
+    if (buttonId === "germany") {
+      tg.showAlert("🇩🇪 Выбран сервер: Германия");
+    }
+
+    if (buttonId === "netherlands") {
+      tg.showAlert("🇳🇱 Выбран сервер: Нидерланды");
+    }
+
+    if (buttonId === "usa") {
+      tg.showAlert("🇺🇸 Выбран сервер: США");
+    }
+  });
 }
   </script>
 </body>
