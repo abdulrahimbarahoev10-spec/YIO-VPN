@@ -55,6 +55,12 @@
     const tg = window.Telegram.WebApp;
     tg.ready();
     tg.expand();
+    const user = tg.initDataUnsafe.user;
+
+if (user) {
+  document.querySelector(".logo").innerHTML =
+    "🔐 YIO VPN<br><small>Привет, " + user.first_name + "!</small>";
+}
     function connectVPN() {
       tg.showAlert("Функция подключения VPN будет добавлена на следующем этапе.");
     }
