@@ -1,230 +1,238 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>YIO VPN</title>
+    <title>YIO VPN</title>
 
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-      text-align: center;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    .logo {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 30px;
-    }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0b0b0f;
+            color: white;
+            text-align: center;
+        }
 
-    .logo small {
-      font-size: 17px;
-      font-weight: normal;
-    }
+        .container {
+            max-width: 450px;
+            margin: auto;
+            padding: 25px 18px;
+        }
 
-    .status {
-      margin: 35px 0;
-      font-size: 22px;
-    }
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
 
-    button {
-      width: 100%;
-      padding: 16px;
-      border: 0;
-      border-radius: 14px;
-      font-size: 18px;
-      font-weight: bold;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-  </style>
+        .logo small {
+            display: block;
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 8px;
+            color: #aaa;
+        }
+
+        .status {
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 18px;
+            background: #15151c;
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .status-text {
+            margin-top: 8px;
+            color: #aaa;
+        }
+
+        .plans {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .plan {
+            background: #15151c;
+            border-radius: 18px;
+            padding: 18px;
+        }
+
+        .plan h3 {
+            margin: 0 0 8px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .vpn-button {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .buy-button {
+            background: #2ea6ff;
+            color: white;
+        }
+
+        .help-button {
+            background: #25252e;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
 
-  <div class="logo">
-    🔐 YIO VPN
-  </div>
+<div class="container">
 
-  <div class="status">
-    🟢 VPN готов к подключению
-  </div>
+    <div class="logo">
+        YIO VPN
+        <small>Привет!</small>
+    </div>
 
-  <button onclick="connectVPN()">
-    🚀 ПОДКЛЮЧИТЬ VPN
-  </button>
+    <div class="status">
+        <div class="status-title">
+            🛡 VPN защищён
+        </div>
 
-  <button onclick="subscription()">
-    💳 Моя подписка
-  </button>
+        <div class="status-text" id="status">
+            VPN не подключён
+        </div>
 
-  <button onclick="devices()">
-    📱 Мои устройства
-  </button>
+        <button class="vpn-button" onclick="connectVPN()">
+            🔐 Подключить VPN
+        </button>
+    </div>
 
-  <button onclick="servers()">
-    🌍 Серверы
-  </button>
+    <h2>Тарифы</h2>
 
+    <div class="plans">
 
-  <script>
+        <div class="plan">
+            <h3>1 месяц</h3>
 
-    // Telegram Mini App
+            <div class="price">
+                199 ₽
+            </div>
+
+            <button class="buy-button" onclick="buyPlan('1 месяц', 199)">
+                Купить
+            </button>
+        </div>
+
+        <div class="plan">
+            <h3>3 месяца</h3>
+
+            <div class="price">
+                499 ₽
+            </div>
+
+            <button class="buy-button" onclick="buyPlan('3 месяца', 499)">
+                Купить
+            </button>
+        </div>
+
+        <div class="plan">
+            <h3>12 месяцев</h3>
+
+            <div class="price">
+                1499 ₽
+            </div>
+
+            <button class="buy-button" onclick="buyPlan('12 месяцев', 1499)">
+                Купить
+            </button>
+        </div>
+
+    </div>
+
+    <button class="help-button" onclick="showHelp()">
+        ❓ Помощь
+    </button>
+
+</div>
+
+<script>
+
     const tg = window.Telegram.WebApp;
 
     tg.ready();
     tg.expand();
 
-
-    // Пользователь Telegram
     const user = tg.initDataUnsafe.user;
 
     if (user) {
-      document.querySelector(".logo").innerHTML =
-        "🔐 YIO VPN<br>" +
-        "<small>Привет, " +
-        user.first_name +
-        "!</small>";
+
+        document.querySelector(".logo").innerHTML =
+            "YIO VPN<br><small>Привет, "
+            + (user.first_name || "")
+            + "!</small>";
+
     }
-
-
-    // =========================
-    // ПОДКЛЮЧИТЬ VPN
-    // =========================
 
     function connectVPN() {
 
-      tg.showAlert(
-        "🚀 Подключение VPN\n\n" +
-        "Настоящее VPN-подключение " +
-        "будет подключено на следующем этапе."
-      );
+        document.getElementById("status").innerText =
+            "🔄 Подготавливаем VPN...";
+
+        setTimeout(function() {
+
+            document.getElementById("status").innerText =
+                "⚠️ VPN пока не подключён";
+
+        }, 1000);
+    }
+
+    function buyPlan(plan, price) {
+
+        tg.showAlert(
+            "Вы выбрали тариф: "
+            + plan
+            + "\nСтоимость: "
+            + price
+            + " ₽"
+        );
 
     }
 
+    function showHelp() {
 
-    // =========================
-    // МОЯ ПОДПИСКА
-    // =========================
-
-    function subscription() {
-
-      tg.showAlert(
-        "💳 Моя подписка\n\n" +
-        "Статус: 🟢 Активна\n" +
-        "Тариф: Premium\n" +
-        "Осталось: 30 дней"
-      );
+        tg.showAlert(
+            "YIO VPN\n\n"
+            + "Выберите тариф и оплатите подписку.\n"
+            + "После оплаты VPN-доступ будет выдан автоматически."
+        );
 
     }
 
-
-    // =========================
-    // МОИ УСТРОЙСТВА
-    // =========================
-
-    function devices() {
-
-      tg.showAlert(
-        "📱 Мои устройства\n\n" +
-        "Устройств подключено: 0\n\n" +
-        "Добавление настоящих устройств " +
-        "будет подключено позже."
-      );
-
-    }
-
-
-    // =========================
-    // VPN-СЕРВЕРЫ
-    // =========================
-
-    function servers() {
-
-      tg.showPopup({
-
-        title: "🌍 VPN-серверы",
-
-        message: "Выберите сервер:",
-
-        buttons: [
-
-          {
-            id: "finland",
-            type: "default",
-            text: "🇫🇮 Финляндия"
-          },
-
-          {
-            id: "germany",
-            type: "default",
-            text: "🇩🇪 Германия"
-          },
-
-          {
-            id: "netherlands",
-            type: "default",
-            text: "🇳🇱 Нидерланды"
-          },
-
-          {
-            id: "usa",
-            type: "default",
-            text: "🇺🇸 США"
-          }
-
-        ]
-
-      }, function(buttonId) {
-
-
-        if (buttonId === "finland") {
-
-          tg.showAlert(
-            "🇫🇮 Выбран сервер:\nФинляндия"
-          );
-
-        }
-
-
-        if (buttonId === "germany") {
-
-          tg.showAlert(
-            "🇩🇪 Выбран сервер:\nГермания"
-          );
-
-        }
-
-
-        if (buttonId === "netherlands") {
-
-          tg.showAlert(
-            "🇳🇱 Выбран сервер:\nНидерланды"
-          );
-
-        }
-
-
-        if (buttonId === "usa") {
-
-          tg.showAlert(
-            "🇺🇸 Выбран сервер:\nСША"
-          );
-
-        }
-
-      });
-
-    }
-
-  </script>
+</script>
 
 </body>
 </html>
