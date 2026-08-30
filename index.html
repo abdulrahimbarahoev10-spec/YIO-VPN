@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YIO VPN</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      text-align: center;
+    }
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+    .status {
+      margin: 35px 0;
+      font-size: 22px;
+    }
+    button {
+      width: 100%;
+      padding: 16px;
+      border: 0;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">🔐 YIO VPN</div>
+  <div class="status">
+    🟢 VPN готов к подключению
+  </div>
+  <button onclick="connectVPN()">
+    🚀 ПОДКЛЮЧИТЬ VPN
+  </button>
+  <button>
+    💳 Моя подписка
+  </button>
+  <button>
+    📱 Мои устройства
+  </button>
+  <button>
+    🌍 Серверы
+  </button>
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+    function connectVPN() {
+      tg.showAlert("Функция подключения VPN будет добавлена на следующем этапе.");
+    }
+  </script>
+</body>
+</html>
