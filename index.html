@@ -1,236 +1,489 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0,user-scalable=no">
 
-    <title>YIO VPN</title>
+<title>YIO VPN</title>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0b0b0f;
-            color: white;
-            text-align: center;
-        }
+body {
+    margin: 0;
+    background: #08090d;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Arial, sans-serif;
+}
 
-        .container {
-            max-width: 450px;
-            margin: auto;
-            padding: 25px 18px;
-        }
+.app {
+    max-width: 480px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 20px 16px 35px;
+}
 
-        .logo {
-            font-size: 30px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
+/* HEADER */
 
-        .logo small {
-            display: block;
-            font-size: 16px;
-            font-weight: normal;
-            margin-top: 8px;
-            color: #aaa;
-        }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
 
-        .status {
-            margin: 30px 0;
-            padding: 20px;
-            border-radius: 18px;
-            background: #15151c;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+}
 
-        .status-title {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.user {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #20232c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
 
-        .status-text {
-            margin-top: 8px;
-            color: #aaa;
-        }
+/* MAIN CARD */
 
-        .plans {
-            display: grid;
-            gap: 12px;
-            margin-top: 20px;
-        }
+.main-card {
+    background: linear-gradient(145deg,#151820,#0f1117);
+    border: 1px solid #222630;
+    border-radius: 28px;
+    padding: 28px 20px;
+    text-align: center;
+}
 
-        .plan {
-            background: #15151c;
-            border-radius: 18px;
-            padding: 18px;
-        }
+.shield {
+    width: 95px;
+    height: 95px;
+    margin: 5px auto 18px;
+    border-radius: 50%;
+    background: #181c25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 43px;
+}
 
-        .plan h3 {
-            margin: 0 0 8px;
-        }
+.status {
+    font-size: 21px;
+    font-weight: 700;
+}
 
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px;
-        }
+.status-text {
+    margin-top: 7px;
+    color: #8d929f;
+    font-size: 14px;
+}
 
-        button {
-            width: 100%;
-            border: none;
-            border-radius: 14px;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+.connect {
+    width: 100%;
+    margin-top: 25px;
+    padding: 17px;
+    border: 0;
+    border-radius: 17px;
+    background: #fff;
+    color: #000;
+    font-size: 17px;
+    font-weight: 800;
+}
 
-        .vpn-button {
-            background: #ffffff;
-            color: #000000;
-        }
+.connect:active {
+    transform: scale(.98);
+}
 
-        .buy-button {
-            background: #2ea6ff;
-            color: white;
-        }
+/* SUBSCRIPTION */
 
-        .help-button {
-            background: #25252e;
-            color: white;
-        }
-    </style>
+.section {
+    margin-top: 22px;
+}
+
+.section-title {
+    font-size: 19px;
+    font-weight: 750;
+    margin-bottom: 12px;
+}
+
+.subscription {
+    background: #14171e;
+    border: 1px solid #222630;
+    border-radius: 20px;
+    padding: 18px;
+}
+
+.subscription-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subscription-name {
+    font-weight: 700;
+}
+
+.subscription-date {
+    color: #9095a1;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.badge {
+    padding: 7px 10px;
+    border-radius: 10px;
+    background: #20252e;
+    font-size: 12px;
+}
+
+/* PLANS */
+
+.plan {
+    background: #14171e;
+    border: 1px solid #222630;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 10px;
+}
+
+.plan-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plan-title {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.plan-price {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.plan-info {
+    margin-top: 6px;
+    color: #9095a1;
+    font-size: 13px;
+}
+
+.buy {
+    width: 100%;
+    margin-top: 13px;
+    padding: 13px;
+    border: 0;
+    border-radius: 13px;
+    background: #292e38;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+/* MENU */
+
+.menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.menu-button {
+    padding: 17px 10px;
+    border-radius: 18px;
+    border: 1px solid #222630;
+    background: #14171e;
+    color: white;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.menu-icon {
+    display: block;
+    font-size: 23px;
+    margin-bottom: 7px;
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #666c78;
+    font-size: 12px;
+}
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-    <div class="logo">
-        YIO VPN
-        <small>Привет!</small>
+    <div class="header">
+        <div class="logo">YIO VPN</div>
+        <div class="user" id="userAvatar">Y</div>
     </div>
 
-    <div class="status">
-        <div class="status-title">
-            🛡 VPN защищён
+    <div class="main-card">
+
+        <div class="shield">🛡️</div>
+
+        <div class="status" id="status">
+            VPN отключён
         </div>
 
-        <div class="status-text" id="status">
-            VPN не подключён
+        <div class="status-text" id="statusText">
+            Ваше соединение не защищено
         </div>
 
-        <button class="vpn-button" onclick="connectVPN()">
-            🔐 Подключить VPN
+        <button class="connect" onclick="connectVPN()">
+            Подключить VPN
         </button>
+
     </div>
 
-    <h2>Тарифы</h2>
+    <div class="section">
 
-    <div class="plans">
-
-        <div class="plan">
-            <h3>1 месяц</h3>
-
-            <div class="price">
-                199 ₽
-            </div>
-
-            <button class="buy-button" onclick="buyPlan('1 месяц', 199)">
-                Купить
-            </button>
+        <div class="section-title">
+            Подписка
         </div>
 
-        <div class="plan">
-            <h3>3 месяца</h3>
+        <div class="subscription">
 
-            <div class="price">
-                499 ₽
+            <div class="subscription-row">
+
+                <div>
+                    <div class="subscription-name">
+                        YIO VPN
+                    </div>
+
+                    <div class="subscription-date"
+                         id="subscriptionDate">
+                        Подписка не активна
+                    </div>
+                </div>
+
+                <div class="badge">
+                    Неактивна
+                </div>
+
             </div>
 
-            <button class="buy-button" onclick="buyPlan('3 месяца', 499)">
-                Купить
-            </button>
-        </div>
-
-        <div class="plan">
-            <h3>12 месяцев</h3>
-
-            <div class="price">
-                1499 ₽
-            </div>
-
-            <button class="buy-button" onclick="buyPlan('12 месяцев', 1499)">
-                Купить
-            </button>
         </div>
 
     </div>
 
-    <button class="help-button" onclick="showHelp()">
-        ❓ Помощь
-    </button>
+    <div class="section">
+
+        <div class="section-title">
+            Купить подписку
+        </div>
+
+        <div class="plan">
+
+            <div class="plan-top">
+
+                <div class="plan-title">
+                    1 месяц
+                </div>
+
+                <div class="plan-price">
+                    199 ₽
+                </div>
+
+            </div>
+
+            <div class="plan-info">
+                VPN на 1 месяц
+            </div>
+
+            <button class="buy"
+                    onclick="buyPlan('1 месяц',199)">
+                Купить
+            </button>
+
+        </div>
+
+        <div class="plan">
+
+            <div class="plan-top">
+
+                <div class="plan-title">
+                    3 месяца
+                </div>
+
+                <div class="plan-price">
+                    499 ₽
+                </div>
+
+            </div>
+
+            <div class="plan-info">
+                VPN на 3 месяца
+            </div>
+
+            <button class="buy"
+                    onclick="buyPlan('3 месяца',499)">
+                Купить
+            </button>
+
+        </div>
+
+        <div class="plan">
+
+            <div class="plan-top">
+
+                <div class="plan-title">
+                    12 месяцев
+                </div>
+
+                <div class="plan-price">
+                    1499 ₽
+                </div>
+
+            </div>
+
+            <div class="plan-info">
+                VPN на 12 месяцев
+            </div>
+
+            <button class="buy"
+                    onclick="buyPlan('12 месяцев',1499)">
+                Купить
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="menu">
+
+        <button class="menu-button"
+                onclick="devices()">
+            <span class="menu-icon">📱</span>
+            Мои устройства
+        </button>
+
+        <button class="menu-button"
+                onclick="subscription()">
+            <span class="menu-icon">💳</span>
+            Моя подписка
+        </button>
+
+        <button class="menu-button"
+                onclick="settings()">
+            <span class="menu-icon">⚙️</span>
+            Настройки
+        </button>
+
+        <button class="menu-button"
+                onclick="help()">
+            <span class="menu-icon">❓</span>
+            Помощь
+        </button>
+
+    </div>
+
+    <div class="footer">
+        YIO VPN • Безопасное соединение
+    </div>
 
 </div>
 
 <script>
 
-    const tg = window.Telegram.WebApp;
+const tg = window.Telegram.WebApp;
 
-    tg.ready();
-    tg.expand();
+tg.ready();
+tg.expand();
 
-    const user = tg.initDataUnsafe.user;
+const user = tg.initDataUnsafe.user;
 
-    if (user) {
+if (user) {
 
-        document.querySelector(".logo").innerHTML =
-            "YIO VPN<br><small>Привет, "
-            + (user.first_name || "")
-            + "!</small>";
+    const name = user.first_name || "Y";
 
-    }
+    document.getElementById("userAvatar")
+        .innerText = name.charAt(0).toUpperCase();
 
-    function connectVPN() {
+}
 
-        document.getElementById("status").innerText =
-            "🔄 Подготавливаем VPN...";
+function connectVPN() {
 
-        setTimeout(function() {
+    const status =
+        document.getElementById("status");
 
-            document.getElementById("status").innerText =
-                "⚠️ VPN пока не подключён";
+    const text =
+        document.getElementById("statusText");
 
-        }, 1000);
-    }
+    status.innerText = "Подключение...";
+    text.innerText = "Подготавливаем соединение";
 
-    function buyPlan(plan, price) {
+    setTimeout(() => {
 
-        tg.showAlert(
-            "Вы выбрали тариф: "
-            + plan
-            + "\nСтоимость: "
-            + price
-            + " ₽"
-        );
-
-    }
-
-    function showHelp() {
+        status.innerText = "VPN отключён";
+        text.innerText =
+            "Сначала приобретите подписку";
 
         tg.showAlert(
-            "YIO VPN\n\n"
-            + "Выберите тариф и оплатите подписку.\n"
-            + "После оплаты VPN-доступ будет выдан автоматически."
+            "Для подключения VPN необходимо приобрести подписку."
         );
 
-    }
+    }, 1000);
+}
+
+function buyPlan(plan, price) {
+
+    tg.showAlert(
+        "Тариф: " + plan +
+        "\nСтоимость: " + price + " ₽"
+    );
+
+}
+
+function devices() {
+
+    tg.showAlert(
+        "Мои устройства\n\nПока нет подключённых устройств."
+    );
+
+}
+
+function subscription() {
+
+    tg.showAlert(
+        "Моя подписка\n\nПодписка пока не активна."
+    );
+
+}
+
+function settings() {
+
+    tg.showAlert(
+        "Настройки YIO VPN"
+    );
+
+}
+
+function help() {
+
+    tg.showAlert(
+        "YIO VPN\n\nЕсли у вас возникли проблемы с подключением, обратитесь в поддержку."
+    );
+
+}
 
 </script>
 
